@@ -1,13 +1,46 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using TaskManagment.Web.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//paso 1
+//filtro goblal para que solo acepte usuarios autenticados
+var politicaUsuariosAutenticados = new AuthorizationPolicyBuilder()
+    .RequireAuthenticatedUser()
+    .Build();
+
+
+
+
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+
+builder.Services.AddControllersWithViews(opciones =>
+{
+    // paso 2
+    opciones.Filters.Add(new AuthorizeFilter(politicaUsuariosAutenticados));
+});
 
 builder.Services.AddDbContext<ApplicationDbContext>(Options => Options.UseSqlServer("name=DefaultConnection"));
 
+
+builder.Services.AddAuthentication();
+builder.Services.AddIdentity<IdentityUser, IdentityRole>(opciones =>
+{
+    opciones.SignIn.RequireConfirmedAccount = false;
+    
+}).AddEntityFrameworkStores<ApplicationDbContext>()
+  .AddDefaultTokenProviders();
+
+builder.Services.PostConfigure<CookieAuthenticationOptions>(IdentityConstants.ApplicationScheme,
+    opciones =>
+    {
+        opciones.LogoutPath = "/usuarios/login";
+        opciones.AccessDeniedPath = "/usuarios/login";
+    });
 
 var app = builder.Build();
 
@@ -23,7 +56,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
