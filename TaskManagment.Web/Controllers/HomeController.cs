@@ -19,7 +19,7 @@ namespace TaskManagment.Web.Controllers
 
         public IActionResult Index()
         {
-            ViewBag.Saludos = _localizer["Buenos dias"];
+           
             return View();
         }
 
