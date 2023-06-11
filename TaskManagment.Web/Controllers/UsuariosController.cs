@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using TaskManagment.Web.Data;
 using TaskManagment.Web.Models;
@@ -173,21 +174,21 @@ namespace TaskManagment.Web.Controllers
             return RedirectToAction("login", routeValues: new { mensaje });
         }
 
-        //[HttpGet]
+        [HttpGet]
         //[Authorize(Roles = Constantes.RolAdmin)]
-        //public async Task<IActionResult> Listado(string mensaje = null)
-        //{
-        //    var usuarios = await context.Users.Select(u => new UsuarioViewModel
-        //    {
-        //        Email = u.Email
-        //    }).ToListAsync();
+        public async Task<IActionResult> Listado(string mensaje = null)
+        {
+            var usuarios = await context.Users.Select(u => new UsuarioViewModel
+            {
+                Email = u.Email
+            }).ToListAsync();
 
-        //    var modelo = new UsuariosListadoViewModel();
-        //    modelo.Usuarios = usuarios;
-        //    modelo.Mensaje = mensaje;
-        //    return View(modelo);
+            var modelo = new UsuariosListadoViewModel();
+            modelo.Usuarios = usuarios;
+            modelo.Mensaje = mensaje;
+            return View(modelo);
 
-        //}
+        }
 
         //[HttpPost]
         //[Authorize(Roles = Constantes.RolAdmin)]
