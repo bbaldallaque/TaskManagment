@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 
 namespace TaskManagment.Web.Entities
 {
@@ -15,6 +16,10 @@ namespace TaskManagment.Web.Entities
         public int Orden { get; set; }
 
         public DateTime FechaCreacion { get; set; }
+
+        public string UsuarioCreacionId { get; set; }
+
+        public IdentityUser UsuarioCreacion { get; set; }
 
         public List<Paso> Pasos { get; set; }
     }
