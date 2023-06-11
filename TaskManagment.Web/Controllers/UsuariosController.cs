@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using TaskManagment.Web.Data;
 using TaskManagment.Web.Models;
+using TaskManagment.Web.Servicios;
 
 namespace TaskManagment.Web.Controllers
 {
@@ -190,38 +191,38 @@ namespace TaskManagment.Web.Controllers
 
         }
 
-        //[HttpPost]
+        [HttpPost]
         //[Authorize(Roles = Constantes.RolAdmin)]
-        //public async Task<IActionResult> HacerAdmin(string email)
-        //{
-        //    var usuario = await context.Users.Where(u => u.Email == email).FirstOrDefaultAsync();
+        public async Task<IActionResult> HacerAdmin(string email)
+        {
+            var usuario = await context.Users.Where(u => u.Email == email).FirstOrDefaultAsync();
 
-        //    if (usuario is null)
-        //    {
-        //        return NotFound();
-        //    }
+            if (usuario is null)
+            {
+                return NotFound();
+            }
 
-        //    await userManager.AddToRoleAsync(usuario, Constantes.RolAdmin);
+            await userManager.AddToRoleAsync(usuario, Constantes.RolAdmin);
 
-        //    return RedirectToAction("Listado",
-        //        routeValues: new { mensaje = "Rol asignado correctamente a " + email });
-        //}
+            return RedirectToAction("Listado",
+                routeValues: new { mensaje = "Rol asignado correctamente a " + email });
+        }
 
-        //[HttpPost]
+        [HttpPost]
         //[Authorize(Roles = Constantes.RolAdmin)]
-        //public async Task<IActionResult> RemoverAdmin(string email)
-        //{
-        //    var usuario = await context.Users.Where(u => u.Email == email).FirstOrDefaultAsync();
+        public async Task<IActionResult> RemoverAdmin(string email)
+        {
+            var usuario = await context.Users.Where(u => u.Email == email).FirstOrDefaultAsync();
 
-        //    if (usuario is null)
-        //    {
-        //        return NotFound();
-        //    }
+            if (usuario is null)
+            {
+                return NotFound();
+            }
 
-        //    await userManager.RemoveFromRoleAsync(usuario, Constantes.RolAdmin);
+            await userManager.RemoveFromRoleAsync(usuario, Constantes.RolAdmin);
 
-        //    return RedirectToAction("Listado",
-        //        routeValues: new { mensaje = "Rol removido correctamente a " + email });
-        //}
+            return RedirectToAction("Listado",
+                routeValues: new { mensaje = "Rol removido correctamente a " + email });
+        }
     }
 }
