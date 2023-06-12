@@ -13,9 +13,9 @@ namespace TaskManagment.Web.Entities
         [Unicode]
         public string Url { get; set; }
 
-        public string TituloArchivoAdjunto { get; set; }
+        public string Titulo { get; set; }
 
-        public int OrdenArchivoAdjunto { get; set; }
+        public int Orden { get; set; }
 
         public DateTime FechaCreacion { get; set; }
     }

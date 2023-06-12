@@ -55,6 +55,10 @@ builder.Services.PostConfigure<CookieAuthenticationOptions>(IdentityConstants.Ap
 
 builder.Services.AddTransient<IServicioUsuarios, ServicioUsuarios>();
 builder.Services.AddAutoMapper(typeof(Program));
+
+//send file to local storage 
+builder.Services.AddTransient<IAlmacenadorArchivos, AlmacenadorArchivosLocal>();
+//send file to azure blod storage
 //builder.Services.AddTransient<IAlmacenadorArchivos, AlmacenadorArchivosAzure>();
 
 builder.Services.AddLocalization(opciones =>
