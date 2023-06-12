@@ -112,7 +112,7 @@ async function manejarClickTarea(tarea) {
 
     json.pasos.forEach(paso => {
         tareaEditarVM.pasos.push(
-            new pasoViewModel({ ...paso, modoEdicion: false })
+            new pasoViewModel({...paso, modoEdicion: false })
         )
     })
 

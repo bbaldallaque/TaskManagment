@@ -6,11 +6,11 @@
 
         public int TareaId { get; set; }
 
-        public string DescripcionPaso { get; set;}
+        public string Descripcion { get; set;}
 
         public bool Realizado { get; set; }
 
-        public int OrdenPaso { get; set; }
+        public int Orden { get; set; }
 
         public Tarea Tarea { get; set; }
     }
