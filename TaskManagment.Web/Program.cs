@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
+using System.Text.Json.Serialization;
 using TaskManagment.Web;
 using TaskManagment.Web.Data;
 using TaskManagment.Web.Servicios;
@@ -28,6 +29,9 @@ builder.Services.AddControllersWithViews(opciones =>
   .AddDataAnnotationsLocalization(optiones =>
   {
       optiones.DataAnnotationLocalizerProvider = (_, factoria) => factoria.Create(typeof(RecursoCompartido));
+  }).AddJsonOptions(opciones =>
+  {
+      opciones.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
   });
 
 builder.Services.AddDbContext<ApplicationDbContext>(Options => Options.UseSqlServer("name=DefaultConnection"));
@@ -48,6 +52,10 @@ builder.Services.PostConfigure<CookieAuthenticationOptions>(IdentityConstants.Ap
         opciones.AccessDeniedPath = "/usuarios/login";
     });
 
+
+builder.Services.AddTransient<IServicioUsuarios, ServicioUsuarios>();
+builder.Services.AddAutoMapper(typeof(Program));
+//builder.Services.AddTransient<IAlmacenadorArchivos, AlmacenadorArchivosAzure>();
 
 builder.Services.AddLocalization(opciones =>
 {

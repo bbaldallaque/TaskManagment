@@ -22,5 +22,7 @@ namespace TaskManagment.Web.Entities
         public IdentityUser UsuarioCreacion { get; set; }
 
         public List<Paso> Pasos { get; set; }
+
+        public List<ArchivoAdjunto> ArchivosAdjuntos { get; set; }
     }
 }

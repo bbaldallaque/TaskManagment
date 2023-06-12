@@ -123,7 +123,13 @@
   <data name="Error.Requerido" xml:space="preserve">
     <value>tha field {0} is required</value>
   </data>
+  <data name="Mis tareas" xml:space="preserve">
+    <value>My Task</value>
+  </data>
   <data name="Recuerdame" xml:space="preserve">
     <value>remember me</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value />
   </data>
 </root>
